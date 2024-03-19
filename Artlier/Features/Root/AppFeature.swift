@@ -12,10 +12,11 @@ import ComposableArchitecture
 struct AppFeature {
     @ObservableState
     struct State {
-        var userId: String?
-        var phase: Phase = .notRequested
+        var userId: String
+        var phase: Phase = .success
         
         var intro = IntroFeature.State()
+        var mainTab = MainTabFeature.State()
     }
     
     enum Action: TCAFeatureAction {
@@ -24,6 +25,7 @@ struct AppFeature {
         case delegate(DelegateAction)
         
         case intro(IntroFeature.Action)
+        case mainTab(MainTabFeature.Action)
         
         enum ViewAction {
             case task
@@ -43,6 +45,9 @@ struct AppFeature {
     var body: some ReducerOf<Self> {
         Scope(state: \.intro, action: \.intro) {
             IntroFeature()
+        }
+        Scope(state: \.mainTab, action: \.mainTab) {
+            MainTabFeature()
         }
         
         Reduce { state, action in
@@ -76,6 +81,9 @@ struct AppFeature {
                 
                 
             case .intro:
+                return .none
+                
+            case .mainTab:
                 return .none
             }
         }

@@ -16,7 +16,7 @@ struct ArtlierApp: App {
         WindowGroup {
             AuthenticatedView(
                 store: Store(
-                    initialState: AppFeature.State()
+                    initialState: AppFeature.State(userId: "")
                 ) {
                     AppFeature()
                 }

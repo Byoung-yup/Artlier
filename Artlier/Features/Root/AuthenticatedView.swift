@@ -13,7 +13,7 @@ struct AuthenticatedView: View {
     
     var body: some View {
         contentView
-            .task { await store.send(.view(.task)).finish() }
+//            .task { await store.send(.view(.task)).finish() }
     }
     
     @ViewBuilder
@@ -24,7 +24,7 @@ struct AuthenticatedView: View {
         case .loading:
             LoadingView()
         case .success:
-            EmptyView()
+            MainTabView(store: store.scope(state: \.mainTab, action: \.mainTab))
         case .fail:
             IntroView(store: store.scope(state: \.intro, action: \.intro))
         }
@@ -34,7 +34,7 @@ struct AuthenticatedView: View {
 #Preview {
     AuthenticatedView(
         store: Store(
-            initialState: AppFeature.State()
+            initialState: AppFeature.State(userId: "")
         ) {
             AppFeature()
         }

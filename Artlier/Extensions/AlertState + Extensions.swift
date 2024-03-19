@@ -8,17 +8,18 @@
 import ComposableArchitecture
 
 extension AlertState {
-//    static var confirmPasswordErrorAlert: Self {
-//        AlertState (
-//            title: TextState("안내"),
-//            message: TextState("비밀번호가 일치하지 않습니다."),
-//            buttons: [
-//                ButtonState(role: .cancel, label: {
-//                    TextState("확인")
-//                })
-//            ]
-//        )
-//    }
+    static var PasswordErrorAlert: Self {
+        AlertState (
+            title: TextState("안내"),
+            message: TextState("비밀번호가 올바르지 않습니다."),
+            buttons: [
+                ButtonState(role: .cancel, label: {
+                    TextState("확인")
+                })
+            ]
+        )
+    }
+    
     static var unknownErrorAlert: Self {
         AlertState (
             title: TextState("안내"),

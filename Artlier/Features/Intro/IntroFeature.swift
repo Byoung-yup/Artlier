@@ -17,14 +17,14 @@ struct IntroFeature {
         var path = StackState<Path.State>()
     }
     
-    enum Action: TCAFeatureAction {
-        case view(ViewAction)
+    enum Action: ViewAction, TCAFeatureAction {
+        case view(View)
         case `internal`(InternalAction)
         case delegate(DelegateAction)
         
         case path(StackAction<Path.State, Path.Action>)
         
-        enum ViewAction {
+        enum View {
             case loginButtonTapped
             case registerButtonTapped
         }

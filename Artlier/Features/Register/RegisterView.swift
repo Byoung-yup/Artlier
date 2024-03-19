@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
+@ViewAction(for: RegisterFeature.self)
 struct RegisterView: View {
     @Bindable var store: StoreOf<RegisterFeature>
     
@@ -23,7 +24,7 @@ struct RegisterView: View {
         .overlay(alignment: .bottom) {
             // MARK: register Button
             Button {
-                store.send(.view(.registerButtonTapped))
+                send(.registerButtonTapped)
             } label: {
                 if store.isLoading {
                     ProgressView()
@@ -41,7 +42,7 @@ struct RegisterView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    store.send(.view(.exitButtonTapped))
+                    send(.exitButtonTapped)
                 } label: {
                     Image(systemName: "chevron.backward")
                         .foregroundStyle(.black)

@@ -25,15 +25,15 @@ struct RegisterFeature {
         @Presents var alert: AlertState<Void>?
     }
     
-    enum Action: TCAFeatureAction, BindableAction {
-        case view(ViewAction)
+    enum Action: ViewAction, TCAFeatureAction, BindableAction {
+        case view(View)
         case `internal`(InternalAction)
         case delegate(DelegateAction)
         
         case binding(BindingAction<State>)
         case alert(PresentationAction<Void>)
         
-        enum ViewAction {
+        enum View {
             case exitButtonTapped
             case registerButtonTapped
         }

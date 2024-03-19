@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
+
 struct IntroView: View {
     @Bindable var store: StoreOf<IntroFeature>
     
@@ -56,7 +57,7 @@ struct IntroView: View {
 }
 
 fileprivate struct BottomView: View {
-    @Bindable var store: StoreOf<IntroFeature>
+    let store: StoreOf<IntroFeature>
     
     var body: some View {
         VStack(spacing: 40) {
@@ -123,13 +124,14 @@ fileprivate struct BottomView: View {
     }
 }
 
+@ViewAction(for: IntroFeature.self)
 fileprivate struct BottomMiddleView: View {
-    @Bindable var store: StoreOf<IntroFeature>
+    let store: StoreOf<IntroFeature>
     
     var body: some View {
         HStack(alignment: .center) {
             Button {
-                store.send(.view(.loginButtonTapped))
+                send(.loginButtonTapped)
             } label: {
                 Text("이메일 로그인")
                     .foregroundStyle(.black)
@@ -142,7 +144,7 @@ fileprivate struct BottomMiddleView: View {
                 .frame(width: 2)
             
             Button {
-                store.send(.view(.registerButtonTapped))
+                send(.registerButtonTapped)
             } label: {
                 Text("회원가입")
                     .foregroundStyle(.black)

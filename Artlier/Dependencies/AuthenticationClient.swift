@@ -12,13 +12,16 @@ import FirebaseAuth
 struct AuthenticationClient {
     var listenAuthState: @Sendable () async throws -> AsyncThrowingStream<String?, Error>
     var createUser: (_ email: String, _ password: String) async throws -> Void
+    var signIn: @Sendable (_ email: String, _ password: String) async throws -> String
     
     init(
         listenAuthState: @escaping @Sendable () async throws -> AsyncThrowingStream<String?, Error>,
-        createUser: @escaping (_ email: String, _ password: String) async throws -> Void
+        createUser: @escaping (_ email: String, _ password: String) async throws -> Void,
+        signIn: @escaping @Sendable(_ email: String, _ password: String) async throws -> String
     ) {
         self.listenAuthState = listenAuthState
         self.createUser = createUser
+        self.signIn = signIn
     }
 }
 
@@ -48,6 +51,17 @@ extension AuthenticationClient: DependencyKey {
             } catch let error {
                 print("createUser error", error.localizedDescription)
                 throw AppError.FirebaseAuthError
+            }
+        },
+        signIn: {
+             (email, password) in
+            do {
+                let result = try await Auth.auth().signIn(withEmail: email, password: password)
+                let user = result.user
+                return user.uid
+            } catch let error as NSError {
+                print("signIn error", error.localizedDescription)
+                throw AppError.mapError(error)
             }
         }
     )
