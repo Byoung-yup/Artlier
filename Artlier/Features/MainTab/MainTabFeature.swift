@@ -19,36 +19,48 @@ enum Tab: Hashable {
 struct MainTabFeature {
     @ObservableState
     struct State {
-//        var selectedTab: Tab = .home
-//        var destination: Destination.State
+        var userId: String
+        
+        var account: AccountFeature.State?
         
         var contact: ContactFeature.State = .init()
         var message: MessageFeature.State = .init()
         var home: HomeFeature.State = .init()
-        var plus: PlusFeature.State = .init()
+        var profile: ProfileFeature.State = .init()
         var setting: SettingFeature.State = .init()
         
-        var phase: Phase = .success
+        var phase: Phase = .notRequested
     }
     
-    enum Action: ViewAction {
+    enum Action: ViewAction, TCAFeatureAction {
         case view(View)
+        case `internal`(InternalAction)
+        case delegate(DelegateAction)
+        
+        case account(AccountFeature.Action)
         
         case contact(ContactFeature.Action)
         case message(MessageFeature.Action)
         case home(HomeFeature.Action)
-        case plus(PlusFeature.Action)
+        case profile(ProfileFeature.Action)
         case setting(SettingFeature.Action)
-//        case destination(Destination.Action)
-//        case binding(BindingAction<State>)
         
         enum View {
-            case tabSelected(Tab)
+            case onAppear
+        }
+        
+        enum InternalAction {
+            case existUserResponse(TaskResult<Bool>)
+        }
+        
+        enum DelegateAction {
+            
         }
     }
     
+    @Dependency(\.userClient) var userClient
+    
     var body: some ReducerOf<Self> {
-//        BindingReducer()
         Scope(state: \.contact, action: \.contact) {
             ContactFeature()
         }
@@ -58,8 +70,8 @@ struct MainTabFeature {
         Scope(state: \.home, action: \.home) {
             HomeFeature()
         }
-        Scope(state: \.plus, action: \.plus) {
-            PlusFeature()
+        Scope(state: \.profile, action: \.profile) {
+            ProfileFeature()
         }
         Scope(state: \.setting, action: \.setting) {
             SettingFeature()
@@ -69,89 +81,42 @@ struct MainTabFeature {
             switch action {
             case let .view(viewAction):
                 switch viewAction {
-                case let .tabSelected(tabItem):
-//                    switch tabItem {
-//                    case .contact:
-//                        state.destination = .contact(ContactFeature.State())
-//                    case .message:
-//                        state.destination = .message(MessageFeature.State())
-//                    case .home:
-//                        state.destination = .home(HomeFeature.State())
-//                    case .plus:
-//                        state.destination = .plus(PlusFeature.State())
-//                    case .setting:
-//                        state.destination = .setting(SettingFeature.State())
-//                    }
+                case .onAppear:
+                    state.phase = .loading
+                    return .run { [userId = state.userId] send in
+                        await send(
+                            .internal(
+                                .existUserResponse(
+                                    await TaskResult {
+                                        try await userClient.existUser(userId)
+                                    }
+                                )
+                            )
+                        )
+                    }
+                }
+                
+            case let .internal(internalAction):
+                switch internalAction {
+                case let .existUserResponse(.success(status)):
+                    if status {
+                        state.phase = .success
+                    } else {
+                        state.phase = .fail
+                        state.account = AccountFeature.State()
+                    }
+                    return .none
+                case .existUserResponse(.failure(_)):
+                    state.phase = .fail
                     return .none
                 }
                 
-//            case .binding(\.selectedTab):
-//                switch state.selectedTab {
-//                case .contact:
-//                    state.destination = .contact(ContactFeature.State())
-//                case .message:
-//                    state.destination = .message(MessageFeature.State())
-//                case .home:
-//                    state.destination = .home(HomeFeature.State())
-//                case .plus:
-//                    state.destination = .plus(PlusFeature.State())
-//                case .setting:
-//                    state.destination = .setting(SettingFeature.State())
-//                }
-//                return .none
-//                
-//            case .binding(_):
-//                return .none
-                
-//            case .destination(_):
-//                return .none
             default:
                 return .none
             }
         }
-    }
-}
-
-extension MainTabFeature {
-    @Reducer
-    struct Destination {
-        @ObservableState
-        enum State {
-            case contact(ContactFeature.State = .init())
-            case message(MessageFeature.State = .init())
-            case home(HomeFeature.State = .init())
-            case plus(PlusFeature.State = .init())
-            case setting(SettingFeature.State = .init())
-        }
-        
-        enum Action {
-            case contact(ContactFeature.Action)
-            case message(MessageFeature.Action)
-            case home(HomeFeature.Action)
-            case plus(PlusFeature.Action)
-            case setting(SettingFeature.Action)
-        }
-        
-        var body: some ReducerOf<Self> {
-            Scope(state: \.contact, action: \.contact) {
-                ContactFeature()
-            }
-            Scope(state: \.message, action: \.message) {
-                MessageFeature()
-            }
-            Scope(state: \.home, action: \.home) {
-                HomeFeature()
-            }
-            Scope(state: \.plus, action: \.plus) {
-                PlusFeature()
-            }
-            Scope(state: \.setting, action: \.setting) {
-                SettingFeature()
-            }
+        .ifLet(\.account, action: \.account) {
+            AccountFeature()
         }
     }
-}
-
-extension MainTabFeature {
-    
 }

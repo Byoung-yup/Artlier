@@ -8,8 +8,8 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct PlusView: View {
-    let store: StoreOf<PlusFeature>
+struct ProfileView: View {
+    let store: StoreOf<ProfileFeature>
     
     var body: some View {
         ZStack {
@@ -22,11 +22,11 @@ struct PlusView: View {
 }
 
 #Preview {
-    PlusView(
+    ProfileView(
         store: Store(
-            initialState: PlusFeature.State()
+            initialState: ProfileFeature.State()
         ) {
-            PlusFeature()
+            ProfileFeature()
         }
     )
 }

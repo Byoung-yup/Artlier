@@ -22,13 +22,16 @@
 		B0787F2D2BA831A600E5A56B /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F2C2BA831A600E5A56B /* ContactView.swift */; };
 		B0787F2F2BA831AE00E5A56B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F2E2BA831AE00E5A56B /* MessageView.swift */; };
 		B0787F312BA831B300E5A56B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F302BA831B300E5A56B /* HomeView.swift */; };
-		B0787F332BA831B900E5A56B /* PlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F322BA831B900E5A56B /* PlusView.swift */; };
+		B0787F332BA831B900E5A56B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F322BA831B900E5A56B /* ProfileView.swift */; };
 		B0787F352BA831BF00E5A56B /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F342BA831BF00E5A56B /* SettingView.swift */; };
 		B0787F372BA8334700E5A56B /* ContactFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F362BA8334700E5A56B /* ContactFeature.swift */; };
 		B0787F392BA833A100E5A56B /* MessageFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F382BA833A100E5A56B /* MessageFeature.swift */; };
 		B0787F3B2BA833CC00E5A56B /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F3A2BA833CC00E5A56B /* HomeFeature.swift */; };
-		B0787F3D2BA833D700E5A56B /* PlusFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F3C2BA833D700E5A56B /* PlusFeature.swift */; };
+		B0787F3D2BA833D700E5A56B /* ProfileFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F3C2BA833D700E5A56B /* ProfileFeature.swift */; };
 		B0787F3F2BA833E200E5A56B /* SettingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F3E2BA833E200E5A56B /* SettingFeature.swift */; };
+		B07D82E02BAAD4A30039E223 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D82DF2BAAD4A30039E223 /* AccountView.swift */; };
+		B07D82E22BAAD4AC0039E223 /* AccountFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D82E12BAAD4AC0039E223 /* AccountFeature.swift */; };
+		B08B22BF2BAAC315009472A5 /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B22BE2BAAC315009472A5 /* UserClient.swift */; };
 		B08D84FA2B999F5700FDF764 /* ArtlierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D84F92B999F5700FDF764 /* ArtlierApp.swift */; };
 		B08D84FE2B999F5B00FDF764 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B08D84FD2B999F5B00FDF764 /* Assets.xcassets */; };
 		B08D85012B999F5B00FDF764 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B08D85002B999F5B00FDF764 /* Preview Assets.xcassets */; };
@@ -94,13 +97,16 @@
 		B0787F2C2BA831A600E5A56B /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		B0787F2E2BA831AE00E5A56B /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		B0787F302BA831B300E5A56B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		B0787F322BA831B900E5A56B /* PlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusView.swift; sourceTree = "<group>"; };
+		B0787F322BA831B900E5A56B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B0787F342BA831BF00E5A56B /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		B0787F362BA8334700E5A56B /* ContactFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactFeature.swift; sourceTree = "<group>"; };
 		B0787F382BA833A100E5A56B /* MessageFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFeature.swift; sourceTree = "<group>"; };
 		B0787F3A2BA833CC00E5A56B /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
-		B0787F3C2BA833D700E5A56B /* PlusFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusFeature.swift; sourceTree = "<group>"; };
+		B0787F3C2BA833D700E5A56B /* ProfileFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFeature.swift; sourceTree = "<group>"; };
 		B0787F3E2BA833E200E5A56B /* SettingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFeature.swift; sourceTree = "<group>"; };
+		B07D82DF2BAAD4A30039E223 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		B07D82E12BAAD4AC0039E223 /* AccountFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFeature.swift; sourceTree = "<group>"; };
+		B08B22BE2BAAC315009472A5 /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
 		B08D84F62B999F5700FDF764 /* Artlier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artlier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B08D84F92B999F5700FDF764 /* ArtlierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtlierApp.swift; sourceTree = "<group>"; };
 		B08D84FD2B999F5B00FDF764 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -199,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B05C346A2B99B24C00D075B8 /* AuthenticationClient.swift */,
+				B08B22BE2BAAC315009472A5 /* UserClient.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -240,13 +247,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		B0787F2A2BA8318B00E5A56B /* Plus */ = {
+		B0787F2A2BA8318B00E5A56B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				B0787F322BA831B900E5A56B /* PlusView.swift */,
-				B0787F3C2BA833D700E5A56B /* PlusFeature.swift */,
+				B0787F322BA831B900E5A56B /* ProfileView.swift */,
+				B0787F3C2BA833D700E5A56B /* ProfileFeature.swift */,
 			);
-			path = Plus;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		B0787F2B2BA8319C00E5A56B /* Setting */ = {
@@ -256,6 +263,15 @@
 				B0787F3E2BA833E200E5A56B /* SettingFeature.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		B07D82DE2BAAD48F0039E223 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				B07D82DF2BAAD4A30039E223 /* AccountView.swift */,
+				B07D82E12BAAD4AC0039E223 /* AccountFeature.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		B08D84ED2B999F5700FDF764 = {
@@ -337,11 +353,12 @@
 				B05C34642B99B03100D075B8 /* Intro */,
 				B0F05F0E2B9B08950028C936 /* Login */,
 				B0F05F0F2B9B08A70028C936 /* Register */,
+				B07D82DE2BAAD48F0039E223 /* Account */,
 				B0787F222BA82FE500E5A56B /* MainTab */,
 				B0787F272BA8314B00E5A56B /* Contact */,
 				B0787F282BA8316C00E5A56B /* Message */,
 				B0787F292BA8318400E5A56B /* Home */,
-				B0787F2A2BA8318B00E5A56B /* Plus */,
+				B0787F2A2BA8318B00E5A56B /* Profile */,
 				B0787F2B2BA8319C00E5A56B /* Setting */,
 			);
 			path = Features;
@@ -599,16 +616,18 @@
 				B0787F372BA8334700E5A56B /* ContactFeature.swift in Sources */,
 				B08D854E2B99A74500FDF764 /* PlaceholderView.swift in Sources */,
 				B05C34682B99B09E00D075B8 /* IntroFeature.swift in Sources */,
-				B0787F332BA831B900E5A56B /* PlusView.swift in Sources */,
+				B0787F332BA831B900E5A56B /* ProfileView.swift in Sources */,
 				B0F05F112B9B08BA0028C936 /* RegisterView.swift in Sources */,
 				B0F05F1F2B9B61E60028C936 /* AlertState + Extensions.swift in Sources */,
 				B0F05F1A2B9B2EDD0028C936 /* UnderlineTextField.swift in Sources */,
 				B04086922BA972D800EDEB1C /* MainTabType.swift in Sources */,
 				B0F05F1D2B9B584B0028C936 /* DefaultButtonStyle.swift in Sources */,
 				B0787F242BA8300400E5A56B /* MainTabView.swift in Sources */,
-				B0787F3D2BA833D700E5A56B /* PlusFeature.swift in Sources */,
+				B0787F3D2BA833D700E5A56B /* ProfileFeature.swift in Sources */,
 				B0F05F172B9B09540028C936 /* LoginFeature.swift in Sources */,
+				B08B22BF2BAAC315009472A5 /* UserClient.swift in Sources */,
 				B05C345E2B99AC6300D075B8 /* AuthenticatedView.swift in Sources */,
+				B07D82E22BAAD4AC0039E223 /* AccountFeature.swift in Sources */,
 				B0787F3F2BA833E200E5A56B /* SettingFeature.swift in Sources */,
 				B0F05F232B9B697C0028C936 /* Hidden.swift in Sources */,
 				B05C346B2B99B24C00D075B8 /* AuthenticationClient.swift in Sources */,
@@ -620,6 +639,7 @@
 				B08D85512B99A7FC00FDF764 /* TCAFeatureAction.swift in Sources */,
 				B0F05F212B9B64FE0028C936 /* NSString + Extensions.swift in Sources */,
 				B0787F2F2BA831AE00E5A56B /* MessageView.swift in Sources */,
+				B07D82E02BAAD4A30039E223 /* AccountView.swift in Sources */,
 				B08D85482B99A6F300FDF764 /* Phase.swift in Sources */,
 				B08D84FA2B999F5700FDF764 /* ArtlierApp.swift in Sources */,
 				B05C34662B99B07400D075B8 /* IntroView.swift in Sources */,

@@ -12,11 +12,10 @@ import ComposableArchitecture
 struct AppFeature {
     @ObservableState
     struct State {
-        var userId: String
-        var phase: Phase = .success
+        var phase: Phase = .notRequested
         
-        var intro = IntroFeature.State()
-        var mainTab = MainTabFeature.State()
+        var intro: IntroFeature.State?
+        var mainTab: MainTabFeature.State?
     }
     
     enum Action: TCAFeatureAction {
@@ -43,12 +42,12 @@ struct AppFeature {
     @Dependency(\.authenticationClient) var authenticationClient
     
     var body: some ReducerOf<Self> {
-        Scope(state: \.intro, action: \.intro) {
-            IntroFeature()
-        }
-        Scope(state: \.mainTab, action: \.mainTab) {
-            MainTabFeature()
-        }
+//        Scope(state: \.intro, action: \.intro) {
+//            IntroFeature()
+//        }
+//        Scope(state: \.mainTab, action: \.mainTab) {
+//            MainTabFeature()
+//        }
         
         Reduce { state, action in
             switch action {
@@ -68,13 +67,14 @@ struct AppFeature {
             case let .internal(internalAction):
                 switch internalAction {
                 case let .listenAuthStateResponse(.success(userId)):
-                    state.userId = userId
                     state.phase = .success
+                    state.mainTab = MainTabFeature.State(userId: userId)
                     print("Success - listenAuthStateResponse")
                     return .none
                     
-                case let .listenAuthStateResponse(.failure(error)):
+                case .listenAuthStateResponse(.failure(_)):
                     state.phase = .fail
+                    state.intro = IntroFeature.State()
                     print("Failure - listenAuthStateResponse")
                     return .none
                 }
@@ -86,6 +86,12 @@ struct AppFeature {
             case .mainTab:
                 return .none
             }
+        }
+        .ifLet(\.intro, action: \.intro) {
+            IntroFeature()
+        }
+        .ifLet(\.mainTab, action: \.mainTab) {
+            MainTabFeature()
         }
     }
 }

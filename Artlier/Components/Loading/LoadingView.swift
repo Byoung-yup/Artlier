@@ -9,12 +9,14 @@ import SwiftUI
 
 struct LoadingView: View {
     var body: some View {
-        Color.white
-            .ignoresSafeArea(.all)
-        
-        ProgressView()
-            .controlSize(.regular)
-            .tint(.gray)
+        ZStack {
+            Color.white
+                .ignoresSafeArea(.all)
+            
+            ProgressView()
+                .controlSize(.regular)
+                .tint(.gray)
+        }
     }
 }
 

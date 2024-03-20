@@ -13,7 +13,7 @@ struct AuthenticatedView: View {
     
     var body: some View {
         contentView
-//            .task { await store.send(.view(.task)).finish() }
+            .task { await store.send(.view(.task)).finish() }
     }
     
     @ViewBuilder
@@ -24,9 +24,13 @@ struct AuthenticatedView: View {
         case .loading:
             LoadingView()
         case .success:
-            MainTabView(store: store.scope(state: \.mainTab, action: \.mainTab))
+            if let store = store.scope(state: \.mainTab, action: \.mainTab) {
+                MainTabView(store: store)
+            }
         case .fail:
-            IntroView(store: store.scope(state: \.intro, action: \.intro))
+            if let store = store.scope(state: \.intro, action: \.intro) {
+                IntroView(store: store)
+            }
         }
     }
 }
@@ -34,7 +38,7 @@ struct AuthenticatedView: View {
 #Preview {
     AuthenticatedView(
         store: Store(
-            initialState: AppFeature.State(userId: "")
+            initialState: AppFeature.State()
         ) {
             AppFeature()
         }

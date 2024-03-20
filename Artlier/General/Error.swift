@@ -9,6 +9,8 @@ import FirebaseAuth
 
 enum AppError: Error {
     // MARK: firebase Common
+    case FirebaseError
+    // MARK: firebase Auth Common
     case FirebaseAuthError
     
     // MARK: firebase Auth

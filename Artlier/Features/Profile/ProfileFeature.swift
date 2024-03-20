@@ -8,7 +8,7 @@
 import ComposableArchitecture
 
 @Reducer
-struct PlusFeature {
+struct ProfileFeature {
     @ObservableState
     struct State {
         

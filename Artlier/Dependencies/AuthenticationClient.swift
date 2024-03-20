@@ -32,10 +32,10 @@ extension AuthenticationClient: DependencyKey {
                 let listenerHandle = Auth.auth()
                     .addStateDidChangeListener { auth, user in
                         if let user {
-                            print("user exists")
+                            print("exists userId")
                             continuation.yield(with: .success(user.uid))
                         } else {
-                            print("user not exists")
+                            print("not exists userId")
                             continuation.yield(with: .failure(AppError.FirebaseAuthError))
                         }
                     }

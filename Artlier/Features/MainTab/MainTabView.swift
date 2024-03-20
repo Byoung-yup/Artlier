@@ -8,8 +8,9 @@
 import SwiftUI
 import ComposableArchitecture
 
+@ViewAction(for: MainTabFeature.self)
 struct MainTabView: View {
-    @Bindable var store: StoreOf<MainTabFeature>
+    let store: StoreOf<MainTabFeature>
     
     var body: some View {
         contentView
@@ -20,12 +21,15 @@ struct MainTabView: View {
         switch store.phase {
         case .notRequested:
             PlaceholderView()
+                .onAppear { send(.onAppear) }
         case .loading:
             LoadingView()
         case .success:
             MainView(store: store)
         case .fail:
-            EmptyView()
+            if let store = store.scope(state: \.account, action: \.account) {
+                AccountView(store: store)
+            }
         }
     }
 }
@@ -36,7 +40,7 @@ fileprivate struct MainView: View {
     @State private var selectedTab: MainTabType = .home
     
     var body: some View {
-        ZStack {
+//        ZStack {
             TabView(selection: $selectedTab) {
                 ForEach(MainTabType.allCases, id: \.self) { tab in
                     Group {
@@ -50,7 +54,7 @@ fileprivate struct MainView: View {
                             HomeView(store: store.scope(state: \.home, action: \.home))
                                 
                         case .plus:
-                            PlusView(store: store.scope(state: \.plus, action: \.plus))
+                            ProfileView(store: store.scope(state: \.profile, action: \.profile))
                         case .setting:
                             SettingView(store: store.scope(state: \.setting, action: \.setting))
                         }
@@ -65,7 +69,7 @@ fileprivate struct MainView: View {
             
             
 //            SeperatorLineView()
-        }
+//        }
 //        .overlay(alignment: .bottom) {
 //            Rectangle()
 //                .fill(
@@ -109,7 +113,7 @@ fileprivate struct SeperatorLineView: View {
 #Preview {
     MainTabView(
         store: Store(
-            initialState: MainTabFeature.State()
+            initialState: MainTabFeature.State(userId: "")
         ) {
             MainTabFeature()
         }

@@ -9,8 +9,10 @@ import SwiftUI
 
 struct PlaceholderView: View {
     var body: some View {
-        Color.white
-            .ignoresSafeArea(.all)
+        ZStack {
+            Color.white
+                .ignoresSafeArea(.all)
+        }
     }
 }
 
