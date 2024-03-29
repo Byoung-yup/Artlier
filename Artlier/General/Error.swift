@@ -17,6 +17,9 @@ enum AppError: Error {
     case FirebaseinvalidPasswordError
     case FirebasecredentialError
     
+    // MARK: firebase Database
+    case FirebaseExistDataError
+    
     static func mapError(_ error: NSError) -> Self {
         switch error.code {
         case AuthErrorCode.wrongPassword.rawValue:

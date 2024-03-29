@@ -13,7 +13,9 @@ struct MainTabView: View {
     let store: StoreOf<MainTabFeature>
     
     var body: some View {
-        contentView
+        NavigationStack {
+            contentView
+        }
     }
     
     @ViewBuilder

@@ -69,6 +69,8 @@ struct AppFeature {
                 case let .listenAuthStateResponse(.success(userId)):
                     state.phase = .success
                     state.mainTab = MainTabFeature.State(userId: userId)
+//                    state.phase = .fail
+//                    state.intro = IntroFeature.State()
                     print("Success - listenAuthStateResponse")
                     return .none
                     
@@ -81,6 +83,11 @@ struct AppFeature {
                 
                 
             case .intro:
+                return .none
+                
+            case .mainTab(.delegate(.createUserError)):
+                state.phase = .fail
+                state.intro = IntroFeature.State()
                 return .none
                 
             case .mainTab:

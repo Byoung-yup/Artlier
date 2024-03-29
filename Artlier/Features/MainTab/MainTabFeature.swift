@@ -54,11 +54,11 @@ struct MainTabFeature {
         }
         
         enum DelegateAction {
-            
+            case createUserError
         }
     }
     
-    @Dependency(\.userClient) var userClient
+    @Dependency(UserClient.self) var userClient
     
     var body: some ReducerOf<Self> {
         Scope(state: \.contact, action: \.contact) {
@@ -103,13 +103,21 @@ struct MainTabFeature {
                         state.phase = .success
                     } else {
                         state.phase = .fail
-                        state.account = AccountFeature.State()
+                        state.account = AccountFeature.State(userId: state.userId)
                     }
                     return .none
                 case .existUserResponse(.failure(_)):
-                    state.phase = .fail
+                    // TODO: - Error
                     return .none
                 }
+                
+            case .account(.delegate(.createUser)):
+                state.phase = .success
+                state.account = nil
+                return .none
+                
+            case .account(.delegate(.createUserError)):
+                return .send(.delegate(.createUserError))
                 
             default:
                 return .none

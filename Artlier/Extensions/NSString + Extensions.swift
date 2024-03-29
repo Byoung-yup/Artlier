@@ -22,4 +22,11 @@ extension NSString {
         let psPredicate = NSPredicate(format: "SELF MATCHES %@", psRegex)
         return psPredicate.evaluate(with: self)
     }
+    
+    // MARK: nickname Validation
+    func isValidNickname() -> Bool {
+        let nickRegex = "[가-힣A-Za-z0-9]{2,6}"
+        let nickPredicate = NSPredicate(format: "SELF MATCHES %@", nickRegex)
+        return nickPredicate.evaluate(with: self)
+    }
 }
