@@ -11,7 +11,9 @@ import ComposableArchitecture
 struct ProfileFeature {
     @ObservableState
     struct State {
+        var isLoading: Phase = .notRequested
         
+        @Presents var destination: Destination.State?
     }
     
     enum Action: ViewAction, TCAFeatureAction {
@@ -19,8 +21,10 @@ struct ProfileFeature {
         case `internal`(InternalAction)
         case delegate(DelegateAction)
         
+        case destination(PresentationAction<Destination.Action>)
+        
         enum View {
-            
+            case plusButtonTapped
         }
         
         enum InternalAction {
@@ -35,9 +39,33 @@ struct ProfileFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+            case let .view(viewAction):
+                switch viewAction {
+                case .plusButtonTapped:
+                    state.destination = .content(PlusContentFeature.State())
+                    return .none
+                }
             default:
                 return .none
             }
         }
+        .ifLet(\.$destination, action: \.destination)
     }
+}
+
+extension ProfileFeature {
+    @Reducer
+    enum Destination {
+        case content(PlusContentFeature)
+    }
+//        
+//        enum Action {
+//            case content(PlusContentFeature.Action)
+//        }
+//        
+//        var body: some ReducerOf<Self> {
+//            Scope(state: \.content, action: \.content) {
+//                PlusContentFeature()
+//            }
+//        }
 }

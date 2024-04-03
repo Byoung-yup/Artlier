@@ -26,10 +26,12 @@ struct AuthenticationClient {
 }
 
 extension AuthenticationClient: DependencyKey {
+    static let auth = Auth.auth()
+    
     static let liveValue: Self = Self (
         listenAuthState: {
             AsyncThrowingStream { continuation in
-                let listenerHandle = Auth.auth()
+                let listenerHandle = auth
                     .addStateDidChangeListener { auth, user in
                         if let user {
                             print("exists userId")
@@ -41,13 +43,13 @@ extension AuthenticationClient: DependencyKey {
                     }
                 
                 continuation.onTermination = { _ in
-                    Auth.auth().removeStateDidChangeListener(listenerHandle)
+                    auth.removeStateDidChangeListener(listenerHandle)
                 }
             }
         },
         createUser: { (email, password) in
             do {
-                try await Auth.auth().createUser(withEmail: email, password: password)
+                try await auth.createUser(withEmail: email, password: password)
             } catch let error {
                 print("createUser error", error.localizedDescription)
                 throw AppError.FirebaseAuthError
@@ -56,7 +58,7 @@ extension AuthenticationClient: DependencyKey {
         signIn: {
              (email, password) in
             do {
-                let result = try await Auth.auth().signIn(withEmail: email, password: password)
+                let result = try await auth.signIn(withEmail: email, password: password)
                 let user = result.user
                 return user.uid
             } catch let error as NSError {

@@ -67,7 +67,7 @@ struct AccountFeature {
                             .loadTransferableResponse(
                                 await TaskResult {
                                     if let selectedPhoto = selectedPhoto {
-                                        try await photoClient.loadTransferable(selectedPhoto)
+                                        try await photoClient.single_LoadTransferable(selectedPhoto)
                                     } else {
                                         Data()
                                     }

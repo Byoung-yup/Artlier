@@ -17,6 +17,8 @@
 		B05C34682B99B09E00D075B8 /* IntroFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05C34672B99B09E00D075B8 /* IntroFeature.swift */; };
 		B05C346B2B99B24C00D075B8 /* AuthenticationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05C346A2B99B24C00D075B8 /* AuthenticationClient.swift */; };
 		B05C346D2B99B31700D075B8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05C346C2B99B31700D075B8 /* Error.swift */; };
+		B07055992BBD250700DF691B /* PlusContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07055982BBD250700DF691B /* PlusContentView.swift */; };
+		B070559B2BBD251900DF691B /* PlusContentFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B070559A2BBD251900DF691B /* PlusContentFeature.swift */; };
 		B07103562BAC25CA00E68E28 /* PhotoPickerItem + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07103552BAC25CA00E68E28 /* PhotoPickerItem + Extensions.swift */; };
 		B0765C882BB2C35500BA6FF5 /* View + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0765C872BB2C35500BA6FF5 /* View + Extensions.swift */; };
 		B0787F242BA8300400E5A56B /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0787F232BA8300400E5A56B /* MainTabView.swift */; };
@@ -66,6 +68,7 @@
 		B0F05F1F2B9B61E60028C936 /* AlertState + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F05F1E2B9B61E60028C936 /* AlertState + Extensions.swift */; };
 		B0F05F212B9B64FE0028C936 /* NSString + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F05F202B9B64FE0028C936 /* NSString + Extensions.swift */; };
 		B0F05F232B9B697C0028C936 /* Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F05F222B9B697C0028C936 /* Hidden.swift */; };
+		B0FF00D62BBD6E36006FB0F2 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FF00D52BBD6E36006FB0F2 /* CustomNavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,8 @@
 		B05C34672B99B09E00D075B8 /* IntroFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroFeature.swift; sourceTree = "<group>"; };
 		B05C346A2B99B24C00D075B8 /* AuthenticationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationClient.swift; sourceTree = "<group>"; };
 		B05C346C2B99B31700D075B8 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		B07055982BBD250700DF691B /* PlusContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusContentView.swift; sourceTree = "<group>"; };
+		B070559A2BBD251900DF691B /* PlusContentFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusContentFeature.swift; sourceTree = "<group>"; };
 		B07103552BAC25CA00E68E28 /* PhotoPickerItem + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPickerItem + Extensions.swift"; sourceTree = "<group>"; };
 		B0765C872BB2C35500BA6FF5 /* View + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extensions.swift"; sourceTree = "<group>"; };
 		B0787F232BA8300400E5A56B /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 		B0F05F1E2B9B61E60028C936 /* AlertState + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertState + Extensions.swift"; sourceTree = "<group>"; };
 		B0F05F202B9B64FE0028C936 /* NSString + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString + Extensions.swift"; sourceTree = "<group>"; };
 		B0F05F222B9B697C0028C936 /* Hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hidden.swift; sourceTree = "<group>"; };
+		B0FF00D52BBD6E36006FB0F2 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +225,15 @@
 			path = Dependencies;
 			sourceTree = "<group>";
 		};
+		B07055972BBD24ED00DF691B /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				B07055982BBD250700DF691B /* PlusContentView.swift */,
+				B070559A2BBD251900DF691B /* PlusContentFeature.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
 		B0787F222BA82FE500E5A56B /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +276,7 @@
 			children = (
 				B0787F322BA831B900E5A56B /* ProfileView.swift */,
 				B0787F3C2BA833D700E5A56B /* ProfileFeature.swift */,
+				B07055972BBD24ED00DF691B /* Content */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -400,6 +416,7 @@
 				B0F05F182B9B2EC40028C936 /* ViewModifiers */,
 				B05C34612B99AF9500D075B8 /* Loading */,
 				B08D854A2B99A72C00FDF764 /* Placeholder */,
+				B0FF00D42BBD51D6006FB0F2 /* NavigationBar */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -474,6 +491,14 @@
 				B0F05F1C2B9B584B0028C936 /* DefaultButtonStyle.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		B0FF00D42BBD51D6006FB0F2 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				B0FF00D52BBD6E36006FB0F2 /* CustomNavigationBar.swift */,
+			);
+			path = NavigationBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -656,10 +681,13 @@
 				B0787F262BA8301000E5A56B /* MainTabFeature.swift in Sources */,
 				B0787F352BA831BF00E5A56B /* SettingView.swift in Sources */,
 				B0DB33E42BB6A0F000160DAE /* AppUser.swift in Sources */,
+				B0FF00D62BBD6E36006FB0F2 /* CustomNavigationBar.swift in Sources */,
 				B0787F3B2BA833CC00E5A56B /* HomeFeature.swift in Sources */,
 				B08D85512B99A7FC00FDF764 /* TCAFeatureAction.swift in Sources */,
 				B0F05F212B9B64FE0028C936 /* NSString + Extensions.swift in Sources */,
 				B0787F2F2BA831AE00E5A56B /* MessageView.swift in Sources */,
+				B07055992BBD250700DF691B /* PlusContentView.swift in Sources */,
+				B070559B2BBD251900DF691B /* PlusContentFeature.swift in Sources */,
 				B0BBE7572BB562B20074DAFA /* PhotoClient.swift in Sources */,
 				B07D82E02BAAD4A30039E223 /* AccountView.swift in Sources */,
 				B08D85482B99A6F300FDF764 /* Phase.swift in Sources */,

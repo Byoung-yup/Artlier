@@ -22,7 +22,6 @@ struct AccountView: View {
                 .padding(.top, 21)
                 .padding(.horizontal, 21)
         }
-        
         .overlay(alignment: .bottom) {
             // MARK: submit Button
             Button {

@@ -11,4 +11,5 @@ struct AppUser: Codable {
     let id: String
     let nickname: String
     let imageUrl: String
+    let following: [String]?
 }

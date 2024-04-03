@@ -61,7 +61,8 @@ extension UserClient: DependencyKey {
                 let appUser = AppUser(
                     id: id,
                     nickname: nickname,
-                    imageUrl: imageUrl
+                    imageUrl: imageUrl,
+                    following: []
                 )
                 
                 let encoded = try JSONEncoder().encode(appUser)
