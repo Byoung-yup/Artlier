@@ -28,6 +28,7 @@ struct MainTabView: View {
             LoadingView()
         case .success:
             MainView(store: store)
+                .onAppear { send(.fetchUser) }
         case .fail:
             if let store = store.scope(state: \.account, action: \.account) {
                 AccountView(store: store)

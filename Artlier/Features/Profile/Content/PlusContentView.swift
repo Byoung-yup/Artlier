@@ -18,16 +18,41 @@ struct PlusContentView: View {
             Color.white
                 .ignoresSafeArea(.all)
             
-            VStack(spacing: 20) {
-                PhotoView(store: store)
-                    .frame(height: 150)
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 25) {
+                    PhotoView(store: store)
+                        .frame(height: 160)
+                    
+                    TitleView(store: store)
+                        .frame(height: 60)
+                    
+                    ContentTitleView(store: store)
+                        .frame(height: 250)
+                    
+                    CalendarView(store: store)
+                        .frame(height: 40)
+                    
+                    DisclosureView(store: store)
+                        .frame(height: 40)
+                    
+                    Button {
+                        // TODO: add content
+                    } label: {
+                        if store.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("게시하기")
+                        }
+                    }
+                    .buttonStyle(DefaultButtonStyle(textColor: .white))
+                    .opacity(store.isEnabledButton ? 1.0 : 0.3)
+                    .disabled(!(store.isEnabledButton))
+                    .padding(.horizontal, 21)
+                    
+                }
                 
-                TitleView(store: store)
-                    .frame(height: 60)
-                
-                ContentTitleView(store: store)
-                    .frame(height: 250)
             }
+            .padding(.top, 40)
         }
         .overlay(alignment: .top) {
             CustomNavigationBar(
@@ -40,8 +65,10 @@ struct PlusContentView: View {
             )
         }
     }
+    
 }
 
+@ViewAction(for: PlusContentFeature.self)
 fileprivate struct PhotoView: View {
     @Bindable var store: StoreOf<PlusContentFeature>
     
@@ -75,10 +102,9 @@ fileprivate struct PhotoView: View {
                             }
                             .foregroundStyle(.black)
                         }
-                    
                 }
                 
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: rows, spacing: 20) {
                         ForEach(store.selectedPhotoDatas, id: \.self) { data in
                             if let image = UIImage(data: data) {
@@ -86,12 +112,26 @@ fileprivate struct PhotoView: View {
                                     .resizable()
                                     .frame(width: 120 * 9 / 16)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .overlay(alignment: .topTrailing) {
+                                        Button {
+                                            if let index = store.selectedPhotoDatas.firstIndex(of: data) {
+                                                send(.itemDeleteButtonTapped(index))
+                                            }
+                                        } label: {
+                                            Image(systemName: "xmark.circle")
+                                                .resizable()
+                                                .frame(width: 25, height: 25)
+                                                .foregroundStyle(.black)
+                                                .background(.white)
+                                                .clipShape(Circle())
+                                        }
+                                    }
                             }
                         }
                     }
                 }
-                .scrollIndicators(.hidden)
             }
+            .padding(.top, 10)
             
             Text("불건전한 콘텐츠는 삭제 처리 될 수 있습니다.")
                 .font(.system(size: 12, weight: .light))
@@ -150,10 +190,58 @@ fileprivate struct ContentTitleView: View {
                         .opacity(store.content.isEmpty ? 0.25 : 1)
                 }
                 .font(.system(size: 14))
+                .lineSpacing(10)
                 .foregroundColor(.gray)
                 .padding()
+                .background(.white)
                 .border(.black, width: 2)
             }
+        }
+        .padding(.horizontal, 21)
+    }
+}
+
+fileprivate struct CalendarView: View {
+    let store: StoreOf<PlusContentFeature>
+    
+    var body: some View {
+        HStack {
+            Text("전시 날짜")
+                .font(.system(size: 17, weight: .semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Spacer()
+            
+            HStack(spacing: 10) {
+                Image(systemName: "calendar")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                
+                Text(store.date)
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            
+        }
+        .foregroundStyle(.black)
+        .padding(.horizontal, 21)
+    }
+}
+
+fileprivate struct DisclosureView: View {
+    @Bindable var store: StoreOf<PlusContentFeature>
+    
+    var body: some View {
+        VStack(spacing: 5) {
+            HStack {
+                Toggle("이웃 공개", isOn: $store.disclosure)
+                    .font(.system(size: 17, weight: .semibold))
+                    .toggleStyle(SwitchToggleStyle(tint: .black))
+            }
+            
+            Text("콘텐츠가 이웃에게만 보여집니다.")
+                .font(.system(size: 12, weight: .light))
+                .foregroundStyle(.gray)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal, 21)
     }

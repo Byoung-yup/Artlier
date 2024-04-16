@@ -12,6 +12,7 @@ struct ProfileFeature {
     @ObservableState
     struct State {
         var isLoading: Phase = .notRequested
+        var currentUser: AppUser = AppUser.mockData
         
         @Presents var destination: Destination.State?
     }
@@ -24,6 +25,7 @@ struct ProfileFeature {
         case destination(PresentationAction<Destination.Action>)
         
         enum View {
+            case onAppear
             case plusButtonTapped
         }
         
@@ -36,11 +38,17 @@ struct ProfileFeature {
         }
     }
     
+    @Dependency(UserClient.self) var userClient
+    
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case let .view(viewAction):
                 switch viewAction {
+                case .onAppear:
+                    print("onAppear")
+                    state.currentUser = self.userClient.currentUser()
+                    return .none
                 case .plusButtonTapped:
                     state.destination = .content(PlusContentFeature.State())
                     return .none

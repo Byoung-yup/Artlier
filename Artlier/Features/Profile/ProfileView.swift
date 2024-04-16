@@ -17,8 +17,17 @@ struct ProfileView: View {
             Color.white
                 .ignoresSafeArea(.all)
             
-            
+            VStack(spacing: 20) {
+                Text(store.currentUser.id)
+                Text(store.currentUser.nickname)
+                Text(store.currentUser.imageUrl)
+//                Text(store.currentUser.followers)
+//                Text(store.currentUser.following)
+            }
+            .font(.system(size: 15))
+            .foregroundStyle(.black)
         }
+        .onAppear { send(.onAppear) }
         .overlay(alignment: .bottomTrailing) {
             Button {
                 send(.plusButtonTapped)

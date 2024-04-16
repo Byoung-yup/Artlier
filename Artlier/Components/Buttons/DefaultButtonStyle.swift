@@ -19,7 +19,8 @@ struct DefaultButtonStyle: ButtonStyle {
         configuration.label
             .font(.system(size: 14, weight: .semibold))
             .foregroundStyle(textColor)
-            .frame(maxWidth: .infinity, maxHeight: 40)
+            .frame(maxWidth: .infinity)
+            .frame(height: 40)
             .background {
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                     .fill(.black)

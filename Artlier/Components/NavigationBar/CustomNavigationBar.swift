@@ -50,10 +50,12 @@ struct CustomNavigationBar: View {
             }
         }
         .foregroundStyle(.black)
-        .padding(.horizontal, 21)
+        .padding(.horizontal, 14)
         .frame(height: 20)
         .overlay(alignment: .center) {
             Text(title)
+                .foregroundStyle(.black)
+                .font(.system(size: 14, weight: .semibold))
         }
     }
 }

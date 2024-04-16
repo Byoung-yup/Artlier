@@ -12,11 +12,19 @@ import _PhotosUI_SwiftUI
 struct PlusContentFeature {
     @ObservableState
     struct State {
+        var isLoading: Bool = false
         var selectedPhotoItems: [PhotosPickerItem] = []
         var selectedPhotoDatas: [Data] = []
         
         var title: String = ""
         var content: String = ""
+        var date: String = Date().dateformatter()
+        var disclosure: Bool = false
+        
+        var selectedPhotoValidation: Bool = false
+        var titleValidation: Bool = false
+        var contentValidation: Bool = false
+        var isEnabledButton: Bool = false
     }
     
     enum Action: ViewAction, TCAFeatureAction, BindableAction {
@@ -28,6 +36,7 @@ struct PlusContentFeature {
         
         enum View {
             case closeButtonTapped
+            case itemDeleteButtonTapped(Int)
         }
         
         enum InternalAction {
@@ -40,6 +49,7 @@ struct PlusContentFeature {
     }
     
     @Dependency(\.dismiss) var dismiss
+//    @Dependency(\.date.now) var date
     @Dependency(PhotoClient.self) var photoClient
     
     var body: some ReducerOf<Self> {
@@ -60,10 +70,39 @@ struct PlusContentFeature {
                     )
                 }
                 
+            case .binding(\.selectedPhotoItems):
+                if state.selectedPhotoItems.isEmpty {
+                    state.selectedPhotoValidation = false
+                } else {
+                    state.selectedPhotoValidation = true
+                }
+                return self.isEnabledButton(state: &state)
+                
+            case .binding(\.title):
+                if state.title.isEmpty {
+                    state.titleValidation = false
+                } else {
+                    state.titleValidation = true
+                }
+                return self.isEnabledButton(state: &state)
+                
+            case .binding(\.content):
+                if (state.content.isEmpty || state.content.count < 10) {
+                    state.contentValidation = false
+                } else {
+                    state.contentValidation = true
+                }
+                return self.isEnabledButton(state: &state)
+                
             case let .view(viewAction):
                 switch viewAction {
                 case .closeButtonTapped:
                     return .run { _ in await self.dismiss() }
+                    
+                case let .itemDeleteButtonTapped(index):
+                    state.selectedPhotoItems.remove(at: index)
+                    state.selectedPhotoDatas.remove(at: index)
+                    return .none
                 }
                 
             case let .internal(internalAction):
@@ -79,5 +118,10 @@ struct PlusContentFeature {
                 return .none
             }
         }
+    }
+    
+    func isEnabledButton(state: inout State) -> Effect<Action> {
+        state.isEnabledButton = (state.selectedPhotoValidation && state.titleValidation && state.contentValidation)
+        return .none
     }
 }

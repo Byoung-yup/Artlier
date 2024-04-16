@@ -47,10 +47,12 @@ struct MainTabFeature {
         
         enum View {
             case onAppear
+            case fetchUser
         }
         
         enum InternalAction {
             case existUserResponse(TaskResult<Bool>)
+            case fetchUserResponse(TaskResult<Bool>)
         }
         
         enum DelegateAction {
@@ -94,6 +96,20 @@ struct MainTabFeature {
                             )
                         )
                     }
+                case .fetchUser:
+                    print("fetUser")
+                    return .run { [userId = state.userId] send in
+                        await send(
+                            .internal(
+                                .fetchUserResponse(
+                                    await TaskResult {
+                                        try await userClient.fetchUser(userId)
+                                    }
+                                )
+                            )
+                        )
+                    }
+                    
                 }
                 
             case let .internal(internalAction):
@@ -108,6 +124,13 @@ struct MainTabFeature {
                     return .none
                 case .existUserResponse(.failure(_)):
                     // TODO: - Error
+                    return .none
+                    
+                case let .fetchUserResponse(.success(status)):
+                    print("success - fetchUserResponse")
+                    return .none
+                case .fetchUserResponse(.failure(_)):
+                    print("failure - fetchUserResponse")
                     return .none
                 }
                 

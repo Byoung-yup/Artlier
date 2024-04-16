@@ -8,23 +8,32 @@
 import ComposableArchitecture
 import FirebaseDatabase
 import FirebaseStorage
+import Combine
 
 struct UserClient {
     var existUser: @Sendable (_ userId: String) async throws -> Bool
     var createUser: @Sendable (_ id: String, _ nickname: String, _ imageData: Data) async throws -> Bool
+    var fetchUser: (_ id: String) async throws -> Bool
+    var currentUser: @Sendable () -> AppUser
     
     init(
         existUser: @escaping @Sendable (_ userId: String) async throws -> Bool,
-        createUser: @escaping @Sendable (_ id: String, _ nickname: String, _ imageData: Data) async throws -> Bool
+        createUser: @escaping @Sendable (_ id: String, _ nickname: String, _ imageData: Data) async throws -> Bool,
+        fetchUser: @escaping (_ id: String) async throws -> Bool,
+        currentUser: @escaping @Sendable () -> AppUser
     ) {
         self.existUser = existUser
         self.createUser = createUser
+        self.fetchUser = fetchUser
+        self.currentUser = currentUser
     }
 }
 
 extension UserClient: DependencyKey {
     static let dbRef = Database.database().reference()
     static let storageRef = Storage.storage().reference()
+    
+    static let currentUser: CurrentValueSubject<AppUser, Never> = .init(AppUser.mockData)
     
     static let liveValue: Self = Self(
         existUser: { (userId) in
@@ -62,6 +71,7 @@ extension UserClient: DependencyKey {
                     id: id,
                     nickname: nickname,
                     imageUrl: imageUrl,
+                    followers: [],
                     following: []
                 )
                 
@@ -74,6 +84,27 @@ extension UserClient: DependencyKey {
                 print("createUser Error", error.localizedDescription)
                 throw error
             }
+        },
+        fetchUser: { (userId) in
+            do {
+                let path = Constant.getPath(key: DBKey.Users, path: userId)
+                
+                let snapshot = try await dbRef.child(path).getData()
+                guard snapshot.exists() else {
+                    print("not Found User")
+                    return false
+                }
+                print("Find User")
+                let appUser = try snapshot.data(as: AppUser.self)
+                UserClient.currentUser.send(appUser)
+                return true
+            } catch let error {
+                print("error fetchUser", error.localizedDescription)
+                throw AppError.FirebaseError
+            }
+        },
+        currentUser: {
+            return UserClient.currentUser.value
         }
     )
 }
