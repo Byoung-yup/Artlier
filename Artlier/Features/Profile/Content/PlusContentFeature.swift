@@ -18,7 +18,7 @@ struct PlusContentFeature {
         
         var title: String = ""
         var content: String = ""
-        var date: String = Date().dateformatter()
+        var date: String = Date().toFormattedString()
         var disclosure: Bool = false
         
         var selectedPhotoValidation: Bool = false
@@ -37,10 +37,12 @@ struct PlusContentFeature {
         enum View {
             case closeButtonTapped
             case itemDeleteButtonTapped(Int)
+            case createAlbumButtonTapped
         }
         
         enum InternalAction {
             case loadTransferableResponse(TaskResult<[Data]>)
+            case createAlbumResponse(TaskResult<Album>)
         }
         
         enum DelegateAction {
@@ -50,7 +52,10 @@ struct PlusContentFeature {
     
     @Dependency(\.dismiss) var dismiss
 //    @Dependency(\.date.now) var date
-    @Dependency(PhotoClient.self) var photoClient
+    @Dependency(\.uuid) var uuid
+    @Dependency(\.userClient.currentUser) var currentUser
+    @Dependency(\.photoClient) var photoClient
+    @Dependency(\.albumlient) var albumClient
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -69,14 +74,6 @@ struct PlusContentFeature {
                         )
                     )
                 }
-                
-            case .binding(\.selectedPhotoItems):
-                if state.selectedPhotoItems.isEmpty {
-                    state.selectedPhotoValidation = false
-                } else {
-                    state.selectedPhotoValidation = true
-                }
-                return self.isEnabledButton(state: &state)
                 
             case .binding(\.title):
                 if state.title.isEmpty {
@@ -100,18 +97,53 @@ struct PlusContentFeature {
                     return .run { _ in await self.dismiss() }
                     
                 case let .itemDeleteButtonTapped(index):
-                    state.selectedPhotoItems.remove(at: index)
+//                    state.selectedPhotoItems.remove(at: index)
                     state.selectedPhotoDatas.remove(at: index)
-                    return .none
+                    return self.isEnabledButton(state: &state)
+                    
+                case .createAlbumButtonTapped:
+                    state.isLoading = true
+                    return .run { [title = state.title, content = state.content, date = state.date, imageDatas = state.selectedPhotoDatas] send in
+                        await send(
+                            .internal(
+                                .createAlbumResponse(
+                                    await TaskResult {
+                                        let currentUser = self.currentUser()
+                                        
+                                        let album = Album(
+                                            id: uuid().uuidString,
+                                            userId: currentUser.id,
+                                            nickname: currentUser.nickname,
+                                            profileImageUrl: currentUser.imageUrl,
+                                            title: title,
+                                            content: content,
+                                            date: date,
+                                            albumImageUrls: []
+                                        )
+                                        
+                                        return try await albumClient.createAlbum(album, imageDatas)
+                                    }
+                                )
+                            )
+                        )
+                    }
                 }
                 
             case let .internal(internalAction):
                 switch internalAction {
                 case let .loadTransferableResponse(.success(datas)):
                     state.selectedPhotoDatas = datas
-                    return .none
-                case let .loadTransferableResponse(.failure(error)):
+                    return self.isEnabledButton(state: &state)
+                case .loadTransferableResponse(.failure(_)):
                     // TODO: error
+                    return .none
+                    
+                case let .createAlbumResponse(.success(album)):
+                    // TODO: success
+                    print("success - createAlbumResponse")
+                    return .none
+                case .createAlbumResponse(.failure(_)):
+                    print("fail - createAlbumResponse")
                     return .none
                 }
             default:
@@ -121,7 +153,12 @@ struct PlusContentFeature {
     }
     
     func isEnabledButton(state: inout State) -> Effect<Action> {
-        state.isEnabledButton = (state.selectedPhotoValidation && state.titleValidation && state.contentValidation)
+        if state.selectedPhotoDatas.isEmpty {
+            state.isEnabledButton = false
+        } else {
+            state.isEnabledButton = (state.titleValidation && state.contentValidation)
+        }
+//        state.isEnabledButton = (state.selectedPhotoValidation && state.titleValidation && state.contentValidation)
         return .none
     }
 }

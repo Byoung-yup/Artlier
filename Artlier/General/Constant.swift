@@ -14,6 +14,7 @@ typealias DBKey = Constant.DBKey
 extension Constant {
     struct DBKey {
         static let Users = "Users"
+        static let Albums = "Albums"
     }
     
     static func getPath(key: String, path: String?) -> String {

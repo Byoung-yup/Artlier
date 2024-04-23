@@ -11,7 +11,7 @@ import _PhotosUI_SwiftUI
 
 @ViewAction(for: PlusContentFeature.self)
 struct PlusContentView: View {
-    @Bindable var store: StoreOf<PlusContentFeature>
+    let store: StoreOf<PlusContentFeature>
     
     var body: some View {
         ZStack {
@@ -36,7 +36,7 @@ struct PlusContentView: View {
                         .frame(height: 40)
                     
                     Button {
-                        // TODO: add content
+                        send(.createAlbumButtonTapped)
                     } label: {
                         if store.isLoading {
                             ProgressView()

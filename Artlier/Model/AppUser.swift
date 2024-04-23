@@ -13,6 +13,7 @@ struct AppUser: Codable {
     let imageUrl: String
     let followers: [String]?
     let following: [String]?
+    let myAlbums: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -20,12 +21,13 @@ struct AppUser: Codable {
         case imageUrl
         case followers
         case following
+        case myAlbums
     }
 }
 
 extension AppUser {
     // mock
     static var mockData: Self {
-        return Self(id: "test_id", nickname: "test_nickname", imageUrl: "test_url", followers: [], following: [])
+        return Self(id: "test_id", nickname: "test_nickname", imageUrl: "test_url", followers: [], following: [], myAlbums: [])
     }
 }

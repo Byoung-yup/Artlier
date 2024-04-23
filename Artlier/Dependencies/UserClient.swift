@@ -72,7 +72,8 @@ extension UserClient: DependencyKey {
                     nickname: nickname,
                     imageUrl: imageUrl,
                     followers: [],
-                    following: []
+                    following: [],
+                    myAlbums: []
                 )
                 
                 let encoded = try JSONEncoder().encode(appUser)

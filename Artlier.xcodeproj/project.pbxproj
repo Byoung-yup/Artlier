@@ -54,6 +54,9 @@
 		B08D85482B99A6F300FDF764 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D85472B99A6F200FDF764 /* Phase.swift */; };
 		B08D854E2B99A74500FDF764 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D854D2B99A74500FDF764 /* PlaceholderView.swift */; };
 		B08D85512B99A7FC00FDF764 /* TCAFeatureAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D85502B99A7FC00FDF764 /* TCAFeatureAction.swift */; };
+		B0954ADA2BD793B000CD1E35 /* DateFormatter + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0954AD92BD793B000CD1E35 /* DateFormatter + Extensions.swift */; };
+		B0954ADC2BD7962100CD1E35 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0954ADB2BD7962100CD1E35 /* Album.swift */; };
+		B0954ADE2BD7AF1D00CD1E35 /* AlbumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0954ADD2BD7AF1D00CD1E35 /* AlbumClient.swift */; };
 		B0BBE7572BB562B20074DAFA /* PhotoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BBE7562BB562B20074DAFA /* PhotoClient.swift */; };
 		B0C271452BBE952900EF25E3 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C271442BBE952900EF25E3 /* Date + Extensions.swift */; };
 		B0DB33E42BB6A0F000160DAE /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DB33E32BB6A0F000160DAE /* AppUser.swift */; };
@@ -132,6 +135,9 @@
 		B08D85472B99A6F200FDF764 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
 		B08D854D2B99A74500FDF764 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		B08D85502B99A7FC00FDF764 /* TCAFeatureAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCAFeatureAction.swift; sourceTree = "<group>"; };
+		B0954AD92BD793B000CD1E35 /* DateFormatter + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + Extensions.swift"; sourceTree = "<group>"; };
+		B0954ADB2BD7962100CD1E35 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		B0954ADD2BD7AF1D00CD1E35 /* AlbumClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumClient.swift; sourceTree = "<group>"; };
 		B0BBE7562BB562B20074DAFA /* PhotoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoClient.swift; sourceTree = "<group>"; };
 		B0C271442BBE952900EF25E3 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
 		B0DB33E32BB6A0F000160DAE /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 				B05C346A2B99B24C00D075B8 /* AuthenticationClient.swift */,
 				B08B22BE2BAAC315009472A5 /* UserClient.swift */,
 				B0BBE7562BB562B20074DAFA /* PhotoClient.swift */,
+				B0954ADD2BD7AF1D00CD1E35 /* AlbumClient.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -437,6 +444,7 @@
 				B0F05F202B9B64FE0028C936 /* NSString + Extensions.swift */,
 				B0765C872BB2C35500BA6FF5 /* View + Extensions.swift */,
 				B0C271442BBE952900EF25E3 /* Date + Extensions.swift */,
+				B0954AD92BD793B000CD1E35 /* DateFormatter + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -445,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				B0DB33E32BB6A0F000160DAE /* AppUser.swift */,
+				B0954ADB2BD7962100CD1E35 /* Album.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -669,10 +678,12 @@
 				B0F05F1D2B9B584B0028C936 /* DefaultButtonStyle.swift in Sources */,
 				B0787F242BA8300400E5A56B /* MainTabView.swift in Sources */,
 				B0787F3D2BA833D700E5A56B /* ProfileFeature.swift in Sources */,
+				B0954ADA2BD793B000CD1E35 /* DateFormatter + Extensions.swift in Sources */,
 				B0F05F172B9B09540028C936 /* LoginFeature.swift in Sources */,
 				B08B22BF2BAAC315009472A5 /* UserClient.swift in Sources */,
 				B05C345E2B99AC6300D075B8 /* AuthenticatedView.swift in Sources */,
 				B07D82E22BAAD4AC0039E223 /* AccountFeature.swift in Sources */,
+				B0954ADC2BD7962100CD1E35 /* Album.swift in Sources */,
 				B0787F3F2BA833E200E5A56B /* SettingFeature.swift in Sources */,
 				B0F05F232B9B697C0028C936 /* Hidden.swift in Sources */,
 				B05C346B2B99B24C00D075B8 /* AuthenticationClient.swift in Sources */,
@@ -687,6 +698,7 @@
 				B0F05F212B9B64FE0028C936 /* NSString + Extensions.swift in Sources */,
 				B0787F2F2BA831AE00E5A56B /* MessageView.swift in Sources */,
 				B07055992BBD250700DF691B /* PlusContentView.swift in Sources */,
+				B0954ADE2BD7AF1D00CD1E35 /* AlbumClient.swift in Sources */,
 				B070559B2BBD251900DF691B /* PlusContentFeature.swift in Sources */,
 				B0BBE7572BB562B20074DAFA /* PhotoClient.swift in Sources */,
 				B07D82E02BAAD4A30039E223 /* AccountView.swift in Sources */,

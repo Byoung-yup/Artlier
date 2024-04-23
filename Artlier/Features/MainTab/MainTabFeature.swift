@@ -97,7 +97,7 @@ struct MainTabFeature {
                         )
                     }
                 case .fetchUser:
-                    print("fetUser")
+                    print("fetchUser")
                     return .run { [userId = state.userId] send in
                         await send(
                             .internal(
